@@ -286,7 +286,7 @@ TypeClassRepo::registerInstance(new LazyParserFunctor());
           //print "empty string\n";
           return new Maybe(null);
         }
-        $c = $s[0];
+        $c = isset($s[0])? $s[0] : '';
         if(call_user_func($fun, $c)){
           //print "satisfying condition on $c\n";
           return new Maybe(new Tuple($s, ""));

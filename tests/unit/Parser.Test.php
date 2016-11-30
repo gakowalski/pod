@@ -104,7 +104,7 @@ class ParserTest extends lime_test {
   }
 
   public function satisfyTest() {
-    $p = \POD\Satisfy(ctype_upper);
+    $p = \POD\Satisfy('ctype_upper');
     $this->is((string)$p->parse(""), "Nothing", "Satisfy returns Nothing on empty String");
     $this->is((string)$p->parse("abc"), "Nothing", "Satisfy returns nothing if the condition is not met");
     $res = $p->parse("Abc")->get();

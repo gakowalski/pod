@@ -1,5 +1,7 @@
 <?php
-define('PHPZ_DIR', dirname(__DIR__).'/vendor/PHPZ/src');
+if (!defined('PHPZ_DIR')) {
+  define('PHPZ_DIR', dirname(__DIR__).'/vendor/PHPZ/src');
+}
 
 spl_autoload_register(function ($class) {
     if (0 === strpos($class, 'PHPZ\\')) {
