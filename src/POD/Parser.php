@@ -267,7 +267,7 @@ TypeClassRepo::registerInstance(new LazyParserFunctor());
   function Satisfy($fun) {
     $p = __t(Character());
     $res = $p->bind(function($c) use($fun){
-      if($fun($c)){
+      if(call_user_func($fun, $c)){
         return Value($c);
       } else {
         return Failed();
@@ -287,7 +287,7 @@ TypeClassRepo::registerInstance(new LazyParserFunctor());
           return new Maybe(null);
         }
         $c = $s[0];
-        if($fun($c)){
+        if(call_user_func($fun, $c)){
           //print "satisfying condition on $c\n";
           return new Maybe(new Tuple($s, ""));
         } else {
@@ -352,16 +352,16 @@ TypeClassRepo::registerInstance(new LazyParserFunctor());
     return Satisfy(function($c) use($arr){return !in_array($c, $arr);});
   }
 
-  function digit()     { return Satisfy(is_numeric);};
-  function space()     { return Satisfy(ctype_space);};
+  function digit()     { return Satisfy('is_numeric');};
+  function space()     { return Satisfy('ctype_space');};
   function spaces()    { return lists(space());};
   function s()         { return lists(space());};
   function rspace()    { return isIn(array(" ", "\t"));};
   function rspaces()   { return lists(isIn(array(" ", "\t")));};
   function rs()        { return rspaces(); }
-  function upper()     { return Satisfy(ctype_upper);};
-  function lower()     { return Satisfy(ctype_lower);};
-  function alpha()     { return Satisfy(ctype_alpha);};
-  function alphanum()  { return Satisfy(ctype_alnum);};
+  function upper()     { return Satisfy('ctype_upper');};
+  function lower()     { return Satisfy('ctype_lower');};
+  function alpha()     { return Satisfy('ctype_alpha');};
+  function alphanum()  { return Satisfy('ctype_alnum');};
   function eol()       { return C(is("\n"), Seq(is("\r"), is("\n")));};
 ?>
